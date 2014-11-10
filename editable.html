@@ -1,0 +1,71 @@
+<!DOCTYPE html><html><head>
+	<title>Cloud Explorer, cloud storage file browser</title>
+	<meta charset="UTF-8">
+	<meta name="generator" content="Silex v2.0"> <!-- leave this for stats -->
+	<script type="text/javascript" src="http://static.silex.me/2.3/jquery.js"></script>
+	<script type="text/javascript" src="http://static.silex.me/2.3/jquery-ui.js"></script>
+	<script type="text/javascript" src="http://static.silex.me/2.3/jquery.ui.touch-punch.min.js"></script>
+	<script type="text/javascript" src="http://static.silex.me/2.3/pageable.js"></script>
+	<script type="text/javascript" src="http://static.silex.me/2.3/front-end.js"></script>
+	<!-- Normalize -->
+	<link href="http://static.silex.me/2.3/normalize.css" rel="stylesheet">
+	<!-- Silex style -->
+	<link href="http://static.silex.me/2.3/front-end.css" rel="stylesheet">
+
+	<style type="text/css" class="silex-style">@import url('http://fonts.googleapis.com/css?family=Comfortaa:700');
+
+/* define a style for Title, Headings and Normal texts */
+.heading1,
+.heading2,
+.heading3,
+.normal {
+  color: #333333;
+  font-family: verdana, arial;
+  font-weight: normal;
+  line-height: 20px;
+}
+.normal {
+    margin: 0;
+}
+.text-element .normal a {
+    text-decoration: underline;
+    color: #666666;
+}
+/* title style */
+.title {
+  font-size: 30px;
+  font-family: 'Comfortaa', cursive;
+  color: #243DB3;
+  line-height: 30px;
+}
+/* animate hover screenshot CE */
+.hover-border img{
+  position: absolute;
+  -moz-transition: left .2s, top .2s, -moz-box-shadow .2s;
+  -webkit-transition: left .2s, top .2s, -webkit-box-shadow .2s;
+  transition: left .2s, top .2s, box-shadow .2s;
+  top: 0;
+  left: 0;
+}
+.hover-border:hover img{
+  -moz-box-shadow:    3px 3px 2px 2px #666;
+  -webkit-box-shadow: 3px 3px 2px 2px #666;
+  box-shadow:         3px 3px 2px 2px #666;
+  top: -2px;
+  left: -2px;
+}
+.full-width{
+    width: 100% !important;
+}</style>
+  <script type="text/javascript" class="silex-script"></script>
+<meta name="publicationPath" content="/api/1.0/dropbox/exec/put////////sites-silex/cloud-explorer.org"><style id="current-page-style">.page-cloud-explorer{display:inherit; }</style></head>
+<body style="cursor: auto; background-color: rgb(255, 255, 255);" data-silex-type="container" class="silex-runtime">
+	<a id="page-cloud-explorer" data-silex-type="page" class="page-element">Cloud Explorer</a>
+	
+
+
+<div data-silex-type="container" class="editable-style container-element paged-element full-width page-cloud-explorer" style="height: 455px; width: 1080px; top: 650px; left: 1px; position: absolute; box-sizing: content-box; background-color: rgb(36, 61, 179);"></div><div class="background editable-style container-element prevent-draggable" data-silex-type="container" style="top: 5px; left: 55px; width: 970px; height: 1090px; box-sizing: content-box; background-color: transparent;">
+	<div data-silex-type="container" class="editable-style container-element" style="height: 144px; width: 113px; top: -4px; left: 0px; position: absolute; box-sizing: content-box; background-image: url('assets/schmurtz.png'); background-color: rgb(36, 61, 179); background-size: contain; background-position: 0% 100%; background-repeat: no-repeat;"><div data-silex-type="image" class="editable-style image-element" style="height: 66px; width: 103px; top: 21px; left: 4px; position: absolute;"><img src="../..///sites-silex/silex-templates/templates/tech-project/assets/cloud-explorer-logo.png" class="silex-element-content" style="width: 100%; height: 100%;"></div></div><div data-silex-type="text" class="editable-style text-element paged-element page-cloud-explorer" style="height: 19px; width: 970px; top: 370px; left: 0px; position: absolute; border-width: 0px 0px 1px; border-style: solid; box-sizing: content-box; border-color: rgb(51, 51, 51); background-color: transparent;"><div class="silex-element-content normal" style="width: 100%; height: 100%;"></div></div><div data-silex-type="text" class="editable-style text-element" style="height: 215px; width: 564px; top: 178px; left: 0px; position: absolute; box-sizing: content-box;"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><header class="title"><header class="title" style="text-align: left;">Cloud-enable your apps</header><p style="text-align: left;" class="normal"><br><font size="4">A free customizable file browser and a&nbsp;</font></p><p style="text-align: left;" class="normal"><font size="4">self hosted node.js API</font></p><p style="text-align: left;" class="normal"><font size="4"><br></font></p><p style="text-align: left;" class="normal"><font size="4">To manage your users'&nbsp;</font><span style="font-size: large;">cloud services&nbsp;</span></p><p style="text-align: left;" class="normal"><span style="font-size: large;">from your application.</span></p></header></div></div><div data-silex-type="text" class="editable-style text-element" style="height: 200px; width: 285px; top: 420px; left: 0px; position: absolute; box-sizing: content-box;"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><h1 class="heading1">Self hosted</h1><p class="normal">Cloud Explorer is free and open source, so you can host it anywhere, even for free on <a href="http://www.heroku.com/">Heroku</a>.&nbsp;</p><p class="normal"><br></p><blockquote style="margin: 0 0 0 40px; border: none; padding: 0px;"><p class="normal"><a href="https://github.com/silexlabs/cloud-explorer">Download on github</a>.</p></blockquote></div></div><div data-silex-type="text" class="editable-style text-element" style="height: 200px; width: 285px; top: 420px; left: 346px; position: absolute; box-sizing: content-box;"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><h1 class="heading1">Simple to use</h1><p class="normal">Cloud Explorer is very simple to set-up in your app. And also straightforward for your users.</p><p class="normal"><br></p><p class="normal"><br></p><blockquote style="margin: 0 0 0 40px; border: none; padding: 0px;"><p class="normal"><a href="https://github.com/silexlabs/cloud-explorer">Instructions on github</a>.</p></blockquote></div></div><div data-silex-type="text" class="editable-style text-element" style="height: 200px; width: 285px; top: 420px; left: 685px; position: absolute; box-sizing: content-box;"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><h1 class="heading1">Full control</h1><p class="normal">A powerful API on client and server sides. Have full control over your users' data.</p><p class="normal"><br></p><p class="normal"><br></p><blockquote style="margin: 0 0 0 40px; border: none; padding: 0px;"><p class="normal"><a href="https://github.com/silexlabs/cloud-explorer">Start now on github</a>.</p></blockquote></div></div><div data-silex-type="text" class="editable-style text-element" style="height: 356px; width: 525px; top: 10px; left: 444px; position: absolute; box-sizing: content-box; background-image: url('assets/screen.png'); background-repeat: no-repeat;"><div class="silex-element-content normal" style="width: 100%; height: 100%;"></div></div><div data-silex-type="image" class="editable-style image-element hover-border" style="height: 222px; width: 400px;
+top: 47px;
+left: 520px;
+position: absolute;"><img src="assets/cloud-explorer.png" class="silex-element-content" style="width: 100%; height: 100%;"></div><div data-silex-type="container" class="editable-style container-element" style="height: 443px; width: 971px; top: 655px; left: -1px; position: absolute; box-sizing: content-box; background-color: rgb(36, 61, 179);"><div data-silex-type="text" class="editable-style text-element" style="height: 95px; width: 970px; top: 15px; left: 0px; position: absolute; box-sizing: content-box;"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><div style="text-align: center;"><span style="font-family: Comfortaa, cursive; font-size: 30px; line-height: 30px;"><font color="#ffffff">Your users deserve to own their data</font></span></div><div style="text-align: center;"><span style="font-family: Comfortaa, cursive; font-size: 30px; line-height: 30px;"><font color="#ffffff">You need to take control over cloud services</font></span></div></div></div><div data-silex-type="text" class="editable-style text-element" style="height: 130px; width: 475px; top: 115px; left: 0px; position: absolute; box-sizing: content-box;"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><div><font color="#ffffff">Unifile is Cloud Explorer's backend, a node.js API server</font></div><div><font color="#ffffff"><br></font></div><blockquote style="margin: 0 0 0 40px; border: none; padding: 0px;"><div><a href="http://docs.unifile.apiary.io/"><font color="#ffffff">HTTP API</font></a></div><div><a href="https://github.com/silexlabs/unifile"><font color="#ffffff">Server side API</font></a></div></blockquote></div></div><div data-silex-type="text" class="editable-style text-element" style="height: 130px; width: 475px; top: 115px; left: 492px; position: absolute; box-sizing: content-box;"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><div><font color="#ffffff">Cloud Explorer's javascript API is very simple to use</font></div><div><font color="#ffffff"><br></font></div><blockquote style="margin: 0 0 0 40px; border: none; padding: 0px;"><div><font color="#ffffff">ask the user to choose a file or folder</font></div><div><font color="#ffffff">read and write to the user's files</font></div><div><font color="#ffffff">upload files</font></div></blockquote></div></div><div class="editable-style container-element footer" style="height: 207px; width: 970px; top: 244px; left: 0px; position: absolute; box-sizing: content-box; background-color: transparent;" data-silex-type="container"><div class="editable-style image-element" data-silex-type="image" style="position: absolute; height: 79px; width: 265px; top: 24px; left: 5px;" data-silex-href="http://www.silexlabs.org/"><img src="assets/logo-silexlabs.png" class="silex-element-content" style="width: 100%; height: 100%;"></div><div class="editable-style image-element" data-silex-type="image" style="position: absolute; height: 70px; width: 70px; top: 28px; left: 304px;" data-silex-href="http://www.silexlabs.org/category/the-blog/blog-silex"><img src="assets/bouton-blog.png" class="silex-element-content" style="width: 100%; height: 100%;"></div><div class="editable-style image-element" data-silex-type="image" style="position: absolute; height: 70px; width: 70px; top: 28px; left: 900px;" data-silex-href="https://github.com/silexlabs/Silex/issues?labels=help+wanted&amp;state=open"><img src="assets/bouton-join.png" class="silex-element-content" style="width: 100%; height: 100%;"></div><div class="editable-style image-element" data-silex-type="image" style="position: absolute; height: 70px; width: 70px; top: 28px; left: 401px;" data-silex-href="https://twitter.com/silexlabs"><img src="assets/bouton-twitter-bleu.png" class="silex-element-content" style="width: 100%; height: 100%;"></div><div class="editable-style image-element" data-silex-type="image" style="position: absolute; height: 70px; width: 70px; top: 28px; left: 502px;" data-silex-href="http://www.facebook.com/silexlabs "><img src="assets/bouton-facebook-bleu.png" class="silex-element-content" style="width: 100%; height: 100%;"></div><div class="editable-style image-element" data-silex-type="image" style="position: absolute; height: 70px; width: 70px; top: 28px; left: 600px;" data-silex-href="https://plus.google.com/communities/107373636457908189681"><img src="assets/bouton-googleplus-bleu.png" class="silex-element-content" style="width: 100%; height: 100%;"></div><div class="editable-style image-element" data-silex-type="image" style="position: absolute; height: 70px; width: 70px; top: 28px; left: 699px;" data-silex-href="http://www.youtube.com/user/Silexlabs"><img src="assets/bouton-youtube-bleu.png" class="silex-element-content" style="width: 100%; height: 100%;"></div><div class="editable-style image-element" data-silex-type="image" style="position: absolute; height: 70px; width: 70px; top: 28px; left: 800px;" data-silex-href="http://eepurl.com/F48q5"><img src="assets/bouton-newsletter.png" class="silex-element-content" style="width: 100%; height: 100%;"></div><div data-silex-type="text" class="editable-style text-element abel" style="position: absolute; width: 970px; top: 117px; left: 0px; height: 74px; box-sizing: content-box; background-color: transparent;"><div class="silex-element-content" style="width: 100%; height: 100%;"><p style="text-align: center;" class="normal"><font size="2" color="#ffffff">Creative Commons template by <a href="http://lexoyo.me">@lexoyo</a></font></p><p style="text-align: center;" class="normal"><font size="2" color="#ffffff">Powered by <a href="http://www.silex.me">Silex</a></font></p><p style="text-align: center;" class="normal"><a href="https://www.etsy.com/listing/205456827/wix-premade-template-blue-tech-html5"><font size="2" color="#ffffff">Ispired by this template</font></a></p></div></div></div></div></div></body></html>

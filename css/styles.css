@@ -1,0 +1,126 @@
+@import url('http://fonts.googleapis.com/css?family=Comfortaa:700');
+
+/* define a style for Title, Headings and Normal texts */
+.heading1,
+.heading2,
+.heading3,
+.normal {
+  color: #333333;
+  font-family: verdana, arial;
+  font-weight: normal;
+  line-height: 20px;
+}
+.normal {
+    margin: 0;
+}
+.text-element .normal a {
+    text-decoration: underline;
+    color: #666666;
+}
+/* title style */
+.title {
+  font-size: 30px;
+  font-family: 'Comfortaa', cursive;
+  color: #243DB3;
+  line-height: 30px;
+}
+/* animate hover screenshot CE */
+.hover-border img{
+  position: absolute;
+  -moz-transition: left .2s, top .2s, -moz-box-shadow .2s;
+  -webkit-transition: left .2s, top .2s, -webkit-box-shadow .2s;
+  transition: left .2s, top .2s, box-shadow .2s;
+  top: 0;
+  left: 0;
+}
+.hover-border:hover img{
+  -moz-box-shadow:    3px 3px 2px 2px #666;
+  -webkit-box-shadow: 3px 3px 2px 2px #666;
+  box-shadow:         3px 3px 2px 2px #666;
+  top: -2px;
+  left: -2px;
+}
+.full-width{
+    width: 100% !important;
+}
+.element-0{
+	cursor: auto; background-color: rgb(255, 255, 255);
+}
+.element-1{
+	height: 455px; width: 1080px; top: 650px; left: 1px; position: absolute; box-sizing: content-box; background-color: rgb(36, 61, 179);
+}
+.element-2{
+	top: 5px; left: 55px; width: 970px; height: 1090px; box-sizing: content-box; background-color: transparent;
+}
+.element-3{
+	height: 144px; width: 113px; top: -4px; left: 0px; position: absolute; box-sizing: content-box; background-image: url('../assets/schmurtz.png'); background-color: rgb(36, 61, 179); background-size: contain; background-position: 0% 100%; background-repeat: no-repeat;
+}
+.element-4{
+	height: 66px; width: 103px; top: 21px; left: 4px; position: absolute;
+}
+.element-5{
+	height: 19px; width: 970px; top: 370px; left: 0px; position: absolute; border-width: 0px 0px 1px; border-style: solid; box-sizing: content-box; border-color: rgb(51, 51, 51); background-color: transparent;
+}
+.element-6{
+	height: 215px; width: 564px; top: 178px; left: 0px; position: absolute; box-sizing: content-box;
+}
+.element-7{
+	height: 200px; width: 285px; top: 420px; left: 0px; position: absolute; box-sizing: content-box;
+}
+.element-8{
+	height: 200px; width: 285px; top: 420px; left: 346px; position: absolute; box-sizing: content-box;
+}
+.element-9{
+	height: 200px; width: 285px; top: 420px; left: 685px; position: absolute; box-sizing: content-box;
+}
+.element-10{
+	height: 356px; width: 525px; top: 10px; left: 444px; position: absolute; box-sizing: content-box; background-image: url('../assets/screen.png'); background-repeat: no-repeat;
+}
+.element-11{
+	height: 222px; width: 400px;
+top: 47px;
+left: 520px;
+position: absolute;
+}
+.element-12{
+	height: 443px; width: 971px; top: 655px; left: -1px; position: absolute; box-sizing: content-box; background-color: rgb(36, 61, 179);
+}
+.element-13{
+	height: 95px; width: 970px; top: 15px; left: 0px; position: absolute; box-sizing: content-box;
+}
+.element-14{
+	height: 130px; width: 475px; top: 115px; left: 0px; position: absolute; box-sizing: content-box;
+}
+.element-15{
+	height: 130px; width: 475px; top: 115px; left: 492px; position: absolute; box-sizing: content-box;
+}
+.element-16{
+	height: 207px; width: 970px; top: 244px; left: 0px; position: absolute; box-sizing: content-box; background-color: transparent;
+}
+.element-17{
+	position: absolute; height: 79px; width: 265px; top: 24px; left: 5px;
+}
+.element-18{
+	position: absolute; height: 70px; width: 70px; top: 28px; left: 304px;
+}
+.element-19{
+	position: absolute; height: 70px; width: 70px; top: 28px; left: 900px;
+}
+.element-20{
+	position: absolute; height: 70px; width: 70px; top: 28px; left: 401px;
+}
+.element-21{
+	position: absolute; height: 70px; width: 70px; top: 28px; left: 502px;
+}
+.element-22{
+	position: absolute; height: 70px; width: 70px; top: 28px; left: 600px;
+}
+.element-23{
+	position: absolute; height: 70px; width: 70px; top: 28px; left: 699px;
+}
+.element-24{
+	position: absolute; height: 70px; width: 70px; top: 28px; left: 800px;
+}
+.element-25{
+	position: absolute; width: 970px; top: 117px; left: 0px; height: 74px; box-sizing: content-box; background-color: transparent;
+}
