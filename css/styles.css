@@ -17,6 +17,13 @@
     text-decoration: underline;
     color: #666666;
 }
+.nav.text-element .normal a {
+    text-decoration: none;
+    color: #333333;
+}
+.nav.text-element .normal a:hover {
+    text-decoration: underline;
+}
 /* title style */
 .title {
   font-size: 30px;
@@ -43,84 +50,132 @@
 .full-width{
     width: 100% !important;
 }
+.white-text *{
+    color: white !important;
+}
 .element-0{
-	cursor: auto; background-color: rgb(255, 255, 255);
+	cursor: auto; background-color: rgb(255, 255, 255); left: 0px; top: 0px;
 }
 .element-1{
-	height: 455px; width: 1080px; top: 650px; left: 1px; position: absolute; box-sizing: content-box; background-color: rgb(36, 61, 179);
+	top: 5px; left: 55px; width: 970px; height: 2169px; box-sizing: content-box; background-color: transparent;
 }
 .element-2{
-	top: 5px; left: 55px; width: 970px; height: 1090px; box-sizing: content-box; background-color: transparent;
-}
-.element-3{
 	height: 144px; width: 113px; top: -4px; left: 0px; position: absolute; box-sizing: content-box; background-image: url('../assets/schmurtz.png'); background-color: rgb(36, 61, 179); background-size: contain; background-position: 0% 100%; background-repeat: no-repeat;
 }
-.element-4{
+.element-3{
 	height: 66px; width: 103px; top: 21px; left: 4px; position: absolute;
 }
+.element-4{
+	height: 19px; width: 970px; top: 458px; left: 0px; position: absolute; border-width: 0px 0px 1px; border-style: solid; box-sizing: content-box; border-color: rgb(51, 51, 51); background-color: transparent;
+}
 .element-5{
-	height: 19px; width: 970px; top: 370px; left: 0px; position: absolute; border-width: 0px 0px 1px; border-style: solid; box-sizing: content-box; border-color: rgb(51, 51, 51); background-color: transparent;
+	height: 215px; width: 564px; top: 266px; left: 0px; position: absolute; box-sizing: content-box;
 }
 .element-6{
-	height: 215px; width: 564px; top: 178px; left: 0px; position: absolute; box-sizing: content-box;
+	height: 200px; width: 285px; top: 508px; left: 0px; position: absolute; box-sizing: content-box;
 }
 .element-7{
-	height: 200px; width: 285px; top: 420px; left: 0px; position: absolute; box-sizing: content-box;
+	height: 200px; width: 285px; top: 508px; left: 346px; position: absolute; box-sizing: content-box;
 }
 .element-8{
-	height: 200px; width: 285px; top: 420px; left: 346px; position: absolute; box-sizing: content-box;
+	height: 200px; width: 285px; top: 508px; left: 685px; position: absolute; box-sizing: content-box;
 }
 .element-9{
-	height: 200px; width: 285px; top: 420px; left: 685px; position: absolute; box-sizing: content-box;
+	height: 224px; width: 970px; top: 1962px; left: 0px; position: absolute; box-sizing: content-box; background-color: rgb(36, 61, 179);
 }
 .element-10{
-	height: 356px; width: 525px; top: 10px; left: 444px; position: absolute; box-sizing: content-box; background-image: url('../assets/screen.png'); background-repeat: no-repeat;
-}
-.element-11{
-	height: 222px; width: 400px;
-top: 47px;
-left: 520px;
-position: absolute;
-}
-.element-12{
-	height: 443px; width: 971px; top: 655px; left: -1px; position: absolute; box-sizing: content-box; background-color: rgb(36, 61, 179);
-}
-.element-13{
-	height: 95px; width: 970px; top: 15px; left: 0px; position: absolute; box-sizing: content-box;
-}
-.element-14{
-	height: 130px; width: 475px; top: 115px; left: 0px; position: absolute; box-sizing: content-box;
-}
-.element-15{
-	height: 130px; width: 475px; top: 115px; left: 492px; position: absolute; box-sizing: content-box;
-}
-.element-16{
-	height: 207px; width: 970px; top: 244px; left: 0px; position: absolute; box-sizing: content-box; background-color: transparent;
-}
-.element-17{
 	position: absolute; height: 79px; width: 265px; top: 24px; left: 5px;
 }
-.element-18{
+.element-11{
 	position: absolute; height: 70px; width: 70px; top: 28px; left: 304px;
 }
-.element-19{
+.element-12{
 	position: absolute; height: 70px; width: 70px; top: 28px; left: 900px;
 }
-.element-20{
+.element-13{
 	position: absolute; height: 70px; width: 70px; top: 28px; left: 401px;
 }
-.element-21{
+.element-14{
 	position: absolute; height: 70px; width: 70px; top: 28px; left: 502px;
 }
-.element-22{
+.element-15{
 	position: absolute; height: 70px; width: 70px; top: 28px; left: 600px;
 }
-.element-23{
+.element-16{
 	position: absolute; height: 70px; width: 70px; top: 28px; left: 699px;
 }
-.element-24{
+.element-17{
 	position: absolute; height: 70px; width: 70px; top: 28px; left: 800px;
 }
-.element-25{
+.element-18{
 	position: absolute; width: 970px; top: 117px; left: 0px; height: 74px; box-sizing: content-box; background-color: transparent;
+}
+.element-19{
+	height: 81px; width: 971px; top: 1455px; left: 0px; position: absolute; box-sizing: content-box;
+}
+.element-20{
+	height: 677px; width: 970px; top: 747px; left: 0px; position: absolute; box-sizing: content-box; background-color: rgb(36, 61, 179);
+}
+.element-21{
+	height: 54px; width: 970px; top: 15px; left: 0px; position: absolute; box-sizing: content-box;
+}
+.element-22{
+	height: 379px; width: 379px; top: 50px; left: 528px; position: absolute; box-sizing: content-box;
+}
+.element-23{
+	height: 379px; width: 379px; top: 50px; left: 68px; position: absolute;
+}
+.element-24{
+	height: 95px; width: 95px; top: 506px; left: 200px; position: absolute; box-sizing: content-box;
+}
+.element-25{
+	height: 54px; width: 334px; top: 450px; left: 90px; position: absolute; box-sizing: content-box;
+}
+.element-26{
+	height: 68px; width: 72px; top: 515px; left: 90px; position: absolute; background-color: rgb(255, 255, 255); border-width: 5px; border-style: solid; border-color: rgb(255, 255, 255);
+}
+.element-27{
+	height: 54px; width: 235px; top: 600px; left: 97px; position: absolute; box-sizing: content-box;
+}
+.element-28{
+	height: 251px; width: 419px; top: 450px; left: 551px; position: absolute; box-sizing: content-box;
+}
+.element-29{
+	height: 43px; width: 666px; top: 31px; left: 303px; position: absolute; box-sizing: content-box;
+}
+.element-30{
+	height: 356px; width: 520px; top: 100px; left: 399px; position: absolute; box-sizing: content-box; background-image: url('../assets/screen.png'); background-repeat: no-repeat;
+}
+.element-31{
+	height: 222px; width: 400px; top: 135px; left: 474px; position: absolute;
+}
+.element-32{
+	height: 61px; width: 259px; top: 1527px; left: 0px; position: absolute; box-sizing: content-box;
+}
+.element-33{
+	height: 112px; width: 99.6571px; top: 1588px; left: 0px; position: absolute; box-sizing: content-box;
+}
+.element-34{
+	height: 55px; width: 161px; top: 1764px; left: 5px; position: absolute; box-sizing: content-box;
+}
+.element-35{
+	height: 61px; width: 259px; top: 1527px; left: 550px; position: absolute; box-sizing: content-box;
+}
+.element-36{
+	height: 104px; width: 379px; top: 1579px; left: 550px; position: absolute; box-sizing: content-box;
+}
+.element-37{
+	height: 151px; width: 356px; top: 1592px; left: 176px; position: absolute; box-sizing: content-box;
+}
+.element-38{
+	height: 148px; width: 347px; top: 1764px; left: 178px; position: absolute; box-sizing: content-box;
+}
+.element-39{
+	height: 239px; width: 423px; top: 1686px; left: 550px; position: absolute; box-sizing: content-box;
+}
+.element-40{
+	height: 236px; width: 1080px; top: 1959px; left: 0px; position: absolute; box-sizing: content-box; background-color: rgb(36, 61, 179);
+}
+.element-41{
+	height: 699px; width: 1080px; top: 746px; left: 1px; position: absolute; box-sizing: content-box; background-color: rgb(36, 61, 179);
 }
