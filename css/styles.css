@@ -55,6 +55,11 @@
         iframe {
             border: none;
         }
+        /* fix for firefox */
+        
+        .fix-bg-firefox {
+            background-repeat: no-repeat;
+        }
         /* animate hover screenshot CE */
         
         .hover-border img {
@@ -519,7 +524,7 @@
             top: 43px;
             left: 0px;
             box-sizing: content-box;
-            min-height: 81px;
+            min-height: 62px;
         }
         
         .silex-id-1507135534480-8 {
