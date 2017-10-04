@@ -1,102 +1,988 @@
-<!DOCTYPE html><html><head>
-	<title>Cloud Explorer, cloud storage file browser</title>
-	<meta charset="UTF-8">
-	<meta name="generator" content="Silex v2.0"> <!-- leave this for stats -->
-	<script type="text/javascript" src="http://static.silex.me/2.3/jquery.js"></script>
-	<script type="text/javascript" src="http://static.silex.me/2.3/jquery-ui.js"></script>
-	<script type="text/javascript" src="http://static.silex.me/2.3/jquery.ui.touch-punch.min.js"></script>
-	<script type="text/javascript" src="http://static.silex.me/2.3/pageable.js"></script>
-	<script type="text/javascript" src="http://static.silex.me/2.3/front-end.js"></script>
-	<!-- Normalize -->
-	<link href="http://static.silex.me/2.3/normalize.css" rel="stylesheet">
-	<!-- Silex style -->
-	<link href="http://static.silex.me/2.3/front-end.css" rel="stylesheet">
+<!DOCTYPE html>
+<html>
 
-	<style type="text/css" class="silex-style">@import url('http://fonts.googleapis.com/css?family=Comfortaa:700');
+<head>
+    <title>Cloud Explorer, cloud storage file browser</title>
+    <meta charset="UTF-8">
+    <meta name="generator" content="Silex v2.2.7">
+    <!-- leave this for stats -->
+    <script type="text/javascript" src="//localhost:6805/static/2.7/jquery.js" data-silex-static=""></script>
+    <script type="text/javascript" src="//localhost:6805/static/2.7/jquery-ui.js" data-silex-static=""></script>
 
-/* define a style for Title, Headings and Normal texts */
-.heading1,
-.heading2,
-.heading3,
-.normal {
-  color: #333333;
-  font-family: verdana, arial;
-  font-weight: normal;
-  line-height: 20px;
-}
-.normal {
-    margin: 0;
-}
-.text-element .normal a {
-    text-decoration: underline;
-    color: #666666;
-}
-.nav.text-element .normal a {
-    text-decoration: none;
-    color: #333333;
-}
-.nav.text-element .normal a:hover {
-    text-decoration: underline;
-}
-/* title style */
-.title {
-  font-size: 30px;
-  font-family: 'Comfortaa', cursive;
-  color: #243DB3;
-  line-height: 30px;
-}
-/* animate hover screenshot CE */
-.hover-border img{
-  position: absolute;
-  -moz-transition: left .2s, top .2s, -moz-box-shadow .2s;
-  -webkit-transition: left .2s, top .2s, -webkit-box-shadow .2s;
-  transition: left .2s, top .2s, box-shadow .2s;
-  top: 0;
-  left: 0;
-}
-.hover-border:hover img{
-  -moz-box-shadow:    3px 3px 2px 2px #666;
-  -webkit-box-shadow: 3px 3px 2px 2px #666;
-  box-shadow:         3px 3px 2px 2px #666;
-  top: -2px;
-  left: -2px;
-}
-.full-width{
-    width: 100% !important;
-}
-.white-text *{
-    color: white !important;
-}</style>
-  <script type="text/javascript" class="silex-script">/*                       *\
-   Google analytics widget
-\*                       */
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    <script type="text/javascript" src="//localhost:6805/static/2.7/pageable.js" data-silex-static=""></script>
+    <script type="text/javascript" src="//localhost:6805/static/2.7/front-end.js" data-silex-static=""></script>
+    <!-- Normalize -->
+    <link href="//localhost:6805/static/2.7/normalize.css" rel="stylesheet" data-silex-static="">
+    <!-- Silex style -->
+    <link href="//localhost:6805/static/2.7/front-end.css" rel="stylesheet" data-silex-static="">
 
-ga('create', 'UA-19608894-22', 'auto');
-ga('send', 'pageview');
+    <style type="text/css" class="silex-style">
+        @import url('http://fonts.googleapis.com/css?family=Comfortaa:700');
+        /* define a style for Title, Headings and Normal texts */
+        
+        .heading1,
+        .heading2,
+        .heading3,
+        .normal {
+            color: #333333;
+            font-family: verdana, arial;
+            font-weight: normal;
+            line-height: 20px;
+        }
+        
+        .normal {
+            margin: 0;
+        }
+        
+        .text-element .normal a {
+            text-decoration: underline;
+            color: #666666;
+        }
+        
+        .nav.text-element .normal a {
+            text-decoration: none;
+            color: #333333;
+        }
+        
+        .nav.text-element .normal a:hover {
+            text-decoration: underline;
+        }
+        /* title style */
+        
+        .title,
+        .heading1 {
+            font-size: 30px;
+            font-family: 'Comfortaa', cursive;
+            color: #243DB3;
+            line-height: 30px;
+        }
+        
+        .btn {
+            background-color: #2F2F2F;
+            cursor: pointer;
+            border-radius: 5px;
+            border: solid black 1px;
+        }
+        
+        .btn * {
+            color: white;
+            text-align: center;
+            line-height: 3.5;
+        }
+        
+        iframe {
+            border: none;
+        }
+        /* animate hover screenshot CE */
+        
+        .hover-border img {
+            position: absolute;
+            -moz-transition: left .2s, top .2s, -moz-box-shadow .2s;
+            -webkit-transition: left .2s, top .2s, -webkit-box-shadow .2s;
+            transition: left .2s, top .2s, box-shadow .2s;
+            top: 0;
+            left: 0;
+        }
+        
+        .hover-border:hover img {
+            -moz-box-shadow: 3px 3px 2px 2px #666;
+            -webkit-box-shadow: 3px 3px 2px 2px #666;
+            box-shadow: 3px 3px 2px 2px #666;
+            top: -2px;
+            left: -2px;
+        }
+        
+        .full-width {
+            width: 100% !important;
+        }
+        
+        .white-text * {
+            color: white !important;
+        }
+    </style>
+    <script type="text/javascript" class="silex-script">
+    </script>
 
-// notify google when page change
-function onPageChangeGA(newUrl){
-    var currentPage = newUrl.substr(newUrl.indexOf('#!page-') + 7);
-    ga('send', 'pageview', {
-      'page': '/' + currentPage,
-      'title': currentPage
-    });
-}
-$(window).bind( 'hashchange', function (e){
-    onPageChangeGA(e.originalEvent.newURL);
-});
-</script>
-<meta name="publicationPath" content="/api/1.0/dropbox/exec/put////////sites-silex/cloud-explorer.org">
 
-<style id="current-page-style">.page-home{display:inherit; }</style></head>
-<body style="cursor: auto; background-color: rgb(255, 255, 255); left: 0px; top: 0px;" data-silex-type="container" class="silex-runtime">
-	<a id="page-home" data-silex-type="page" class="page-element">Home</a>
+    <style class="silex-inline-styles" type="text/css">
+        .silex-id-1507135535125-41 {
+            cursor: auto;
+            background-color: rgb(255, 255, 255);
+            left: 0px;
+            top: 0px;
+        }
+        
+        .silex-id-1507136302526-1 {
+            min-height: 100px;
+        }
+        
+        @media only screen and (max-width: 480px),
+        only screen and (max-device-width: 480px) {
+            .silex-id-1507136302526-1 {
+                top: 60px;
+                left: 0px;
+            }
+        }
+        
+        .silex-id-1507136302525-0 {
+            min-height: 100px;
+        }
+        
+        @media only screen and (max-width: 480px),
+        only screen and (max-device-width: 480px) {
+            .silex-id-1507136302525-0 {
+                background-color: rgba(47, 47, 47, 1);
+                min-height: 244px;
+            }
+        }
+        
+        .silex-id-1507135534398-2 {
+            width: 667px;
+            top: 35px;
+            left: 303px;
+            box-sizing: content-box;
+            border-top-width: 0px;
+            border-right-width: 0px;
+            border-bottom-width: 1px;
+            border-left-width: 0px;
+            border-top-style: solid;
+            border-right-style: solid;
+            border-bottom-style: solid;
+            border-left-style: solid;
+            min-height: 40px;
+        }
+        
+        .silex-id-1507135535105-39 {
+            width: 113px;
+            top: 0px;
+            left: -1px;
+            box-sizing: content-box;
+            background-image: url('assets/schmurtz.png');
+            background-color: rgba(47, 47, 47, 1);
+            background-size: contain;
+            background-position-x: 0%;
+            background-position-y: 100%;
+            background-repeat-x: no-repeat;
+            background-repeat-y: no-repeat;
+            min-height: 146px;
+        }
+        
+        @media only screen and (max-width: 480px),
+        only screen and (max-device-width: 480px) {
+            .silex-id-1507135535105-39 {
+                background-color: rgba(47, 47, 47, 1);
+                top: 0px;
+                left: 166px;
+                width: 113px;
+                min-height: 244px;
+            }
+        }
+        
+        .silex-id-1507135535094-38 {
+            width: 103px;
+            top: 8px;
+            left: 5px;
+            min-height: 66px;
+        }
+        
+        .silex-id-1507136379292-3 {
+            min-width: 970px;
+        }
+        
+        @media only screen and (max-width: 480px),
+        only screen and (max-device-width: 480px) {
+            .silex-id-1507136379292-3 {
+                top: 304px;
+                left: 0px;
+            }
+        }
+        
+        .silex-id-1507136379292-2 {
+            width: 970px;
+            min-height: 561px;
+            top: 15px;
+            left: 385px;
+            border-width: 0 0 1px 0;
+            border-style: solid;
+            border-color: rgba(51, 51, 51, 1);
+        }
+        
+        @media only screen and (max-width: 480px),
+        only screen and (max-device-width: 480px) {
+            .silex-id-1507136379292-2 {
+                min-height: 908px;
+                top: 0px;
+                left: 12px;
+                width: 443px;
+            }
+        }
+        
+        .silex-id-1507135535033-36 {
+            width: 474px;
+            top: 171px;
+            left: 1px;
+            box-sizing: content-box;
+            min-height: 193px;
+        }
+        
+        .silex-id-1507136037791-44 {
+            width: 466px;
+            background-color: transparent;
+            min-height: 70px;
+            top: 358px;
+            left: 0px;
+        }
+        
+        .silex-id-1507136147928-46 {
+            width: 226px;
+            min-height: 55px;
+            top: 8px;
+            left: 0px;
+        }
+        
+        @media only screen and (max-width: 480px),
+        only screen and (max-device-width: 480px) {
+            .silex-id-1507136147928-46 {
+                top: 6px;
+                left: 6px;
+                width: 170px;
+                min-height: 56px;
+            }
+        }
+        
+        .silex-id-1507137608438-1 {
+            width: 226px;
+            min-height: 55px;
+            top: 8px;
+            left: 239px;
+        }
+        
+        @media only screen and (max-width: 480px),
+        only screen and (max-device-width: 480px) {
+            .silex-id-1507137608438-1 {
+                top: 6px;
+                left: 237px;
+                width: 170px;
+                min-height: 56px;
+            }
+        }
+        
+        .silex-id-1507136059094-45 {
+            width: 226px;
+            min-height: 55px;
+            top: 21px;
+            left: 642px;
+        }
+        
+        .silex-id-1507137294724-0 {
+            width: 430px;
+            background-color: rgb(255, 255, 255);
+            min-height: 430px;
+            top: 80px;
+            left: 540px;
+        }
+        
+        @media only screen and (max-width: 480px),
+        only screen and (max-device-width: 480px) {
+            .silex-id-1507137294724-0 {
+                top: 436px;
+                left: 11px;
+                width: 422px;
+                min-height: 435px;
+            }
+        }
+        
+        .silex-id-1507136590186-5 {
+            min-width: 970px;
+        }
+        
+        @media only screen and (max-width: 480px),
+        only screen and (max-device-width: 480px) {
+            .silex-id-1507136590186-5 {
+                top: 1213px;
+                left: 0px;
+            }
+        }
+        
+        .silex-id-1507136590185-4 {
+            width: 970px;
+            min-height: 311px;
+            top: 15px;
+            left: 215px;
+        }
+        
+        @media only screen and (max-width: 480px),
+        only screen and (max-device-width: 480px) {
+            .silex-id-1507136590185-4 {
+                min-height: 744px;
+            }
+        }
+        
+        .silex-id-1507135535004-35 {
+            width: 285px;
+            top: 52px;
+            left: 0px;
+            box-sizing: content-box;
+            min-height: 200px;
+        }
+        
+        @media only screen and (max-width: 480px),
+        only screen and (max-device-width: 480px) {
+            .silex-id-1507135535004-35 {
+                top: 0px;
+                left: 11px;
+                width: 422px;
+                min-height: 200px;
+            }
+        }
+        
+        .silex-id-1507135534975-34 {
+            width: 285px;
+            top: 52px;
+            left: 346px;
+            box-sizing: content-box;
+            min-height: 200px;
+        }
+        
+        @media only screen and (max-width: 480px),
+        only screen and (max-device-width: 480px) {
+            .silex-id-1507135534975-34 {
+                top: 200px;
+                left: 11px;
+                width: 422px;
+                min-height: 200px;
+            }
+        }
+        
+        .silex-id-1507135534949-33 {
+            width: 285px;
+            top: 52px;
+            left: 685px;
+            box-sizing: content-box;
+            min-height: 200px;
+        }
+        
+        @media only screen and (max-width: 480px),
+        only screen and (max-device-width: 480px) {
+            .silex-id-1507135534949-33 {
+                top: 400px;
+                left: 11px;
+                width: 422px;
+                min-height: 200px;
+            }
+        }
+        
+        .silex-id-1507136665995-7 {
+            background-color: rgba(47, 47, 47, 1);
+            min-width: 970px;
+        }
+        
+        @media only screen and (max-width: 480px),
+        only screen and (max-device-width: 480px) {
+            .silex-id-1507136665995-7 {
+                top: 1957px;
+                left: 0px;
+            }
+        }
+        
+        .silex-id-1507136665994-6 {
+            width: 970px;
+            min-height: 818px;
+            top: 15px;
+            left: 172px;
+        }
+        
+        @media only screen and (max-width: 480px),
+        only screen and (max-device-width: 480px) {
+            .silex-id-1507136665994-6 {
+                min-height: 1634px;
+            }
+        }
+        
+        .silex-id-1507135534746-20 {
+            width: 970px;
+            top: 23px;
+            left: 0px;
+            box-sizing: content-box;
+            min-height: 54px;
+        }
+        
+        .silex-id-1507135534709-19 {
+            width: 379px;
+            top: 118px;
+            left: 528px;
+            box-sizing: content-box;
+            min-height: 379px;
+        }
+        
+        @media only screen and (max-width: 480px),
+        only screen and (max-device-width: 480px) {
+            .silex-id-1507135534709-19 {
+                top: 102px;
+                left: 11px;
+                width: 422px;
+                min-height: 378px;
+            }
+        }
+        
+        .silex-id-1507135534704-18 {
+            width: 379px;
+            top: 118px;
+            left: 68px;
+            min-height: 379px;
+        }
+        
+        @media only screen and (max-width: 480px),
+        only screen and (max-device-width: 480px) {
+            .silex-id-1507135534704-18 {
+                top: 480px;
+                left: 11px;
+                width: 422px;
+                min-height: 379px;
+            }
+        }
+        
+        .silex-id-1507135534657-16 {
+            width: 334px;
+            top: 518px;
+            left: 90px;
+            box-sizing: content-box;
+            min-height: 54px;
+        }
+        
+        @media only screen and (max-width: 480px),
+        only screen and (max-device-width: 480px) {
+            .silex-id-1507135534657-16 {
+                top: 860px;
+                left: 11px;
+                width: 422px;
+                min-height: 60px;
+            }
+        }
+        
+        .silex-id-1507135534614-15 {
+            width: 72px;
+            top: 583px;
+            left: 90px;
+            background-color: rgb(255, 255, 255);
+            border-top-width: 5px;
+            border-right-width: 5px;
+            border-bottom-width: 5px;
+            border-left-width: 5px;
+            border-top-style: solid;
+            border-right-style: solid;
+            border-bottom-style: solid;
+            border-left-style: solid;
+            border-top-color: rgb(255, 255, 255);
+            border-right-color: rgb(255, 255, 255);
+            border-bottom-color: rgb(255, 255, 255);
+            border-left-color: rgb(255, 255, 255);
+            min-height: 68px;
+        }
+        
+        .silex-id-1507135534692-17 {
+            width: 95px;
+            top: 574px;
+            left: 200px;
+            box-sizing: content-box;
+            min-height: 95px;
+        }
+        
+        .silex-id-1507139013216-2 {
+            width: 80px;
+            min-height: 80px;
+            top: 580px;
+            left: 320px;
+        }
+        
+        .silex-id-1507135534584-14 {
+            width: 344px;
+            top: 668px;
+            left: 97px;
+            box-sizing: content-box;
+            min-height: 54px;
+        }
+        
+        .silex-id-1507135534576-13 {
+            width: 419px;
+            top: 518px;
+            left: 551px;
+            box-sizing: content-box;
+            min-height: 251px;
+        }
+        
+        .silex-id-1507136757662-9 {
+            min-width: 970px;
+        }
+        
+        @media only screen and (max-width: 480px),
+        only screen and (max-device-width: 480px) {
+            .silex-id-1507136757662-9 {
+                top: 3591px;
+                left: 0px;
+            }
+        }
+        
+        .silex-id-1507136757662-8 {
+            width: 970px;
+            min-height: 875px;
+            top: 15px;
+            left: 172px;
+        }
+        
+        @media only screen and (max-width: 480px),
+        only screen and (max-device-width: 480px) {
+            .silex-id-1507136757662-8 {
+                min-height: 729px;
+            }
+        }
+        
+        .silex-id-1507135534793-22 {
+            width: 971px;
+            top: 43px;
+            left: 0px;
+            box-sizing: content-box;
+            min-height: 81px;
+        }
+        
+        .silex-id-1507135534480-8 {
+            width: 443px;
+            top: 541px;
+            left: 492px;
+            box-sizing: content-box;
+            min-height: 147px;
+        }
+        
+        .silex-id-1507135534402-4 {
+            width: 347px;
+            top: 539px;
+            left: 90px;
+            box-sizing: content-box;
+            min-height: 148px;
+        }
+        
+        @media only screen and (max-width: 480px),
+        only screen and (max-device-width: 480px) {
+            .silex-id-1507135534402-4 {
+                top: 514px;
+                left: 11px;
+                width: 422px;
+                min-height: 160px;
+            }
+        }
+        
+        .silex-id-1507135534515-9 {
+            width: 219px;
+            top: 213px;
+            left: 145px;
+            box-sizing: content-box;
+            min-height: 245px;
+        }
+        
+        @media only screen and (max-width: 480px),
+        only screen and (max-device-width: 480px) {
+            .silex-id-1507135534515-9 {
+                top: 608px;
+                left: 161px;
+                width: 122px;
+                min-height: 134px;
+            }
+        }
+        
+        .silex-id-1507135534409-5 {
+            width: 340px;
+            top: 269px;
+            left: 575px;
+            box-sizing: content-box;
+            min-height: 151px;
+        }
+        
+        @media only screen and (max-width: 480px),
+        only screen and (max-device-width: 480px) {
+            .silex-id-1507135534409-5 {
+                top: 770px;
+                left: 158px;
+                width: 274px;
+                min-height: 150px;
+            }
+        }
+        
+        .silex-id-1507136824943-11 {
+            background-color: rgba(47, 47, 47, 1);
+        }
+        
+        @media only screen and (max-width: 480px),
+        only screen and (max-device-width: 480px) {
+            .silex-id-1507136824943-11 {
+                top: 4320px;
+                left: 0px;
+            }
+        }
+        
+        .silex-id-1507136824942-10 {
+            min-height: 225px;
+        }
+        
+        @media only screen and (max-width: 480px),
+        only screen and (max-device-width: 480px) {
+            .silex-id-1507136824942-10 {
+                min-height: 390px;
+            }
+        }
+        
+        .silex-id-1507135534928-31 {
+            width: 265px;
+            top: 39px;
+            left: 4px;
+            min-height: 79px;
+        }
+        
+        @media only screen and (max-width: 480px),
+        only screen and (max-device-width: 480px) {
+            .silex-id-1507135534928-31 {
+                top: 8px;
+                left: 31px;
+                width: 382px;
+                min-height: 110px;
+            }
+        }
+        
+        .silex-id-1507135534886-30 {
+            width: 70px;
+            top: 43px;
+            left: 303px;
+            min-height: 70px;
+        }
+        
+        .silex-id-1507135534874-29 {
+            width: 70px;
+            top: 43px;
+            left: 899px;
+            min-height: 70px;
+        }
+        
+        .silex-id-1507135534856-28 {
+            width: 70px;
+            top: 43px;
+            left: 400px;
+            min-height: 70px;
+        }
+        
+        .silex-id-1507135534840-27 {
+            width: 70px;
+            top: 43px;
+            left: 501px;
+            min-height: 70px;
+        }
+        
+        .silex-id-1507135534834-26 {
+            width: 70px;
+            top: 43px;
+            left: 599px;
+            min-height: 70px;
+        }
+        
+        .silex-id-1507135534824-25 {
+            width: 70px;
+            top: 43px;
+            left: 698px;
+            min-height: 70px;
+        }
+        
+        .silex-id-1507135534819-24 {
+            width: 70px;
+            top: 43px;
+            left: 799px;
+            min-height: 70px;
+        }
+        
+        .silex-id-1507135534814-23 {
+            width: 970px;
+            top: 132px;
+            left: -1px;
+            box-sizing: content-box;
+            background-color: transparent;
+            min-height: 74px;
+        }
+    </style>
+    <script type="text/javascript" class="silex-json-styles">
+        [{"desktop":{"silex-id-1507135534398-2":{"width":"667px","top":"35px","left":"303px","box-sizing":"content-box","border-top-width":"0px","border-right-width":"0px","border-bottom-width":"1px","border-left-width":"0px","border-top-style":"solid","border-right-style":"solid","border-bottom-style":"solid","border-left-style":"solid","min-height":"40px"},"silex-id-1507135534402-4":{"width":"347px","top":"539px","left":"90px","box-sizing":"content-box","min-height":"148px"},"silex-id-1507135534409-5":{"width":"340px","top":"269px","left":"575px","box-sizing":"content-box","min-height":"151px"},"silex-id-1507135534480-8":{"width":"443px","top":"541px","left":"492px","box-sizing":"content-box","min-height":"147px"},"silex-id-1507135534515-9":{"width":"219px","top":"213px","left":"145px","box-sizing":"content-box","min-height":"245px"},"silex-id-1507135534576-13":{"width":"419px","top":"518px","left":"551px","box-sizing":"content-box","min-height":"251px"},"silex-id-1507135534584-14":{"width":"344px","top":"668px","left":"97px","box-sizing":"content-box","min-height":"54px"},"silex-id-1507135534614-15":{"width":"72px","top":"583px","left":"90px","background-color":"rgb(255, 255, 255)","border-top-width":"5px","border-right-width":"5px","border-bottom-width":"5px","border-left-width":"5px","border-top-style":"solid","border-right-style":"solid","border-bottom-style":"solid","border-left-style":"solid","border-top-color":"rgb(255, 255, 255)","border-right-color":"rgb(255, 255, 255)","border-bottom-color":"rgb(255, 255, 255)","border-left-color":"rgb(255, 255, 255)","min-height":"68px"},"silex-id-1507135534657-16":{"width":"334px","top":"518px","left":"90px","box-sizing":"content-box","min-height":"54px"},"silex-id-1507135534692-17":{"width":"95px","top":"574px","left":"200px","box-sizing":"content-box","min-height":"95px"},"silex-id-1507135534704-18":{"width":"379px","top":"118px","left":"68px","min-height":"379px"},"silex-id-1507135534709-19":{"width":"379px","top":"118px","left":"528px","box-sizing":"content-box","min-height":"379px"},"silex-id-1507135534746-20":{"width":"970px","top":"23px","left":"0px","box-sizing":"content-box","min-height":"54px"},"silex-id-1507135534766-21":{"width":"970px","top":"747px","left":"0px","box-sizing":"content-box","background-color":"rgb(36, 61, 179)","min-height":"677px"},"silex-id-1507135534793-22":{"width":"971px","top":"43px","left":"0px","box-sizing":"content-box","min-height":"81px"},"silex-id-1507135534814-23":{"width":"970px","top":"132px","left":"-1px","box-sizing":"content-box","background-color":"transparent","min-height":"74px"},"silex-id-1507135534819-24":{"width":"70px","top":"43px","left":"799px","min-height":"70px"},"silex-id-1507135534824-25":{"width":"70px","top":"43px","left":"698px","min-height":"70px"},"silex-id-1507135534834-26":{"width":"70px","top":"43px","left":"599px","min-height":"70px"},"silex-id-1507135534840-27":{"width":"70px","top":"43px","left":"501px","min-height":"70px"},"silex-id-1507135534856-28":{"width":"70px","top":"43px","left":"400px","min-height":"70px"},"silex-id-1507135534874-29":{"width":"70px","top":"43px","left":"899px","min-height":"70px"},"silex-id-1507135534886-30":{"width":"70px","top":"43px","left":"303px","min-height":"70px"},"silex-id-1507135534928-31":{"width":"265px","top":"39px","left":"4px","min-height":"79px"},"silex-id-1507135534942-32":{"width":"970px","top":"1962px","left":"0px","box-sizing":"content-box","background-color":"rgb(36, 61, 179)","min-height":"224px"},"silex-id-1507135534949-33":{"width":"285px","top":"52px","left":"685px","box-sizing":"content-box","min-height":"200px"},"silex-id-1507135534975-34":{"width":"285px","top":"52px","left":"346px","box-sizing":"content-box","min-height":"200px"},"silex-id-1507135535004-35":{"width":"285px","top":"52px","left":"0px","box-sizing":"content-box","min-height":"200px"},"silex-id-1507135535033-36":{"width":"474px","top":"171px","left":"1px","box-sizing":"content-box","min-height":"193px"},"silex-id-1507135535094-38":{"width":"103px","top":"8px","left":"5px","min-height":"66px"},"silex-id-1507135535105-39":{"width":"113px","top":"0px","left":"-1px","box-sizing":"content-box","background-image":"url('assets/schmurtz.png')","background-color":"rgba(47,47,47,1)","background-size":"contain","background-position-x":"0%","background-position-y":"100%","background-repeat-x":"no-repeat","background-repeat-y":"no-repeat","min-height":"146px"},"silex-id-1507135535125-41":{"cursor":"auto","background-color":"rgb(255, 255, 255)","left":"0px","top":"0px"},"silex-id-1507136037791-44":{"width":"466px","background-color":"transparent","min-height":"70px","top":"358px","left":"0px"},"silex-id-1507136059094-45":{"width":"226px","min-height":"55px","top":"21px","left":"642px"},"silex-id-1507136147928-46":{"width":"226px","min-height":"55px","top":"8px","left":"0px"},"silex-id-1507136302525-0":{"width":"","background-color":"","min-height":"100px"},"silex-id-1507136302526-1":{"min-height":"100px"},"silex-id-1507136379292-2":{"width":"970px","background-color":"","min-height":"561px","top":"15px","left":"385px","border-width":"0 0 1px 0 ","border-style":"solid","border-color":"rgba(51,51,51,1)"},"silex-id-1507136379292-3":{"min-width":"970px"},"silex-id-1507136590185-4":{"width":"970px","background-color":"","min-height":"311px","top":"15px","left":"215px"},"silex-id-1507136590186-5":{"min-width":"970px"},"silex-id-1507136665994-6":{"width":"970px","background-color":"","min-height":"818px","top":"15px","left":"172px"},"silex-id-1507136665995-7":{"background-color":"rgba(47,47,47,1)","min-width":"970px"},"silex-id-1507136757662-8":{"width":"970px","background-color":"","min-height":"875px","top":"15px","left":"172px"},"silex-id-1507136757662-9":{"min-width":"970px"},"silex-id-1507136824942-10":{"width":"","background-color":"","min-height":"225px"},"silex-id-1507136824943-11":{"background-color":"rgba(47,47,47,1)"},"silex-id-1507137294724-0":{"width":"430px","background-color":"rgb(255, 255, 255)","min-height":"430px","top":"80px","left":"540px","border-radius":""},"silex-id-1507137608438-1":{"width":"226px","min-height":"55px","top":"8px","left":"239px"},"silex-id-1507139013216-2":{"width":"80px","min-height":"80px","top":"580px","left":"320px"}},"mobile":{"silex-id-1507136302525-0":{"background-color":"rgba(47,47,47,1)","min-height":"244px"},"silex-id-1507135535105-39":{"background-image":"","background-color":"rgba(47,47,47,1)","top":"0px","left":"166px","width":"113px","min-height":"244px"},"silex-id-1507136302526-1":{"top":"60px","left":"0px"},"silex-id-1507136379292-3":{"top":"304px","left":"0px"},"silex-id-1507136379292-2":{"min-height":"908px","top":"0px","left":"12px","width":"443px"},"silex-id-1507136147928-46":{"top":"6px","left":"6px","width":"170px","min-height":"56px"},"silex-id-1507137608438-1":{"top":"6px","left":"237px","width":"170px","min-height":"56px"},"silex-id-1507137294724-0":{"top":"436px","left":"11px","width":"422px","min-height":"435px"},"silex-id-1507135535004-35":{"top":"0px","left":"11px","width":"422px","min-height":"200px"},"silex-id-1507135534975-34":{"top":"200px","left":"11px","width":"422px","min-height":"200px"},"silex-id-1507135534949-33":{"top":"400px","left":"11px","width":"422px","min-height":"200px"},"silex-id-1507136590186-5":{"top":"1213px","left":"0px"},"silex-id-1507136590185-4":{"min-height":"744px"},"silex-id-1507135534657-16":{"top":"860px","left":"11px","width":"422px","min-height":"60px"},"silex-id-1507135534709-19":{"top":"102px","left":"11px","width":"422px","min-height":"378px"},"silex-id-1507135534704-18":{"top":"480px","left":"11px","width":"422px","min-height":"379px"},"silex-id-1507136665995-7":{"top":"1957px","left":"0px"},"silex-id-1507136665994-6":{"min-height":"1634px"},"silex-id-1507136757662-9":{"top":"3591px","left":"0px"},"silex-id-1507136757662-8":{"min-height":"729px"},"silex-id-1507135534515-9":{"top":"608px","left":"161px","width":"122px","min-height":"134px"},"silex-id-1507135534409-5":{"top":"770px","left":"158px","width":"274px","min-height":"150px"},"silex-id-1507135534402-4":{"top":"514px","left":"11px","width":"422px","min-height":"160px"},"silex-id-1507136824943-11":{"top":"4320px","left":"0px"},"silex-id-1507136824942-10":{"min-height":"390px"},"silex-id-1507135534928-31":{"top":"8px","left":"31px","width":"382px","min-height":"110px"}},"componentData":{}}]
+    </script>
 
 
 
-<div class="background editable-style container-element prevent-draggable" data-silex-type="container" style="top: 5px; left: 55px; width: 970px; height: 2169px; box-sizing: content-box; background-color: transparent;">
-	<div data-silex-type="container" class="editable-style container-element" style="height: 144px; width: 113px; top: -4px; left: 0px; position: absolute; box-sizing: content-box; background-image: url('assets/schmurtz.png'); background-color: rgb(36, 61, 179); background-size: contain; background-position: 0% 100%; background-repeat: no-repeat;"><div data-silex-type="image" class="editable-style image-element" style="height: 66px; width: 103px; top: 21px; left: 4px; position: absolute;"><img src="assets/cloud-explorer-logo.png" class="silex-element-content" style="width: 100%; height: 100%;"></div></div><div data-silex-type="text" class="editable-style text-element paged-element page-home" style="height: 19px; width: 970px; top: 458px; left: 0px; position: absolute; border-width: 0px 0px 1px; border-style: solid; box-sizing: content-box; border-color: rgb(51, 51, 51); background-color: transparent;"><div class="silex-element-content normal" style="width: 100%; height: 100%;"></div></div><div data-silex-type="text" class="editable-style text-element" style="height: 215px; width: 564px; top: 266px; left: 0px; position: absolute; box-sizing: content-box;"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><header class="title"><header class="title" style="text-align: left;">Cloud-enable your apps</header><p style="text-align: left;" class="normal"><br><font size="4">A free customizable file browser and a&nbsp;</font></p><p style="text-align: left;" class="normal"><font size="4">self hosted node.js API server.<br></font></p><p style="text-align: left;" class="normal"><font size="4"><br></font></p><p style="text-align: left;" class="normal"><font size="4">To manage your users'&nbsp;</font><span style="font-size: large;">cloud services&nbsp;</span></p><p style="text-align: left;" class="normal"><span style="font-size: large;">from your application.</span></p></header></div></div><div data-silex-type="text" class="editable-style text-element" style="height: 200px; width: 285px; top: 508px; left: 0px; position: absolute; box-sizing: content-box;"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><h1 class="heading1">Self hosted</h1><p class="normal">Cloud Explorer is free and open source, so you can host it anywhere, even for free on <a href="http://www.heroku.com/">Heroku</a>.&nbsp;</p><p class="normal"><br></p><blockquote style="margin: 0 0 0 40px; border: none; padding: 0px;"><p class="normal"><a href="https://github.com/silexlabs/cloud-explorer">Download on github</a>.</p></blockquote></div></div><div data-silex-type="text" class="editable-style text-element" style="height: 200px; width: 285px; top: 508px; left: 346px; position: absolute; box-sizing: content-box;"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><h1 class="heading1">Simple to use</h1><p class="normal">Cloud Explorer is very simple to set-up in your app. And also straightforward for your users.</p><p class="normal"><br></p><p class="normal"><br></p><blockquote style="margin: 0 0 0 40px; border: none; padding: 0px;"><p class="normal"><a href="https://github.com/silexlabs/cloud-explorer">Instructions on github</a>.</p></blockquote></div></div><div data-silex-type="text" class="editable-style text-element" style="height: 200px; width: 285px; top: 508px; left: 685px; position: absolute; box-sizing: content-box;"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><h1 class="heading1">Full control</h1><p class="normal">A powerful API on client and server sides. Have full control over your users' data.</p><p class="normal"><br></p><p class="normal"><br></p><blockquote style="margin: 0 0 0 40px; border: none; padding: 0px;"><p class="normal"><a href="https://github.com/silexlabs/cloud-explorer">Start now on github</a>.</p></blockquote></div></div><div class="editable-style container-element footer" style="height: 224px; width: 970px; top: 1962px; left: 0px; position: absolute; box-sizing: content-box; background-color: rgb(36, 61, 179);" data-silex-type="container"><div class="editable-style image-element" data-silex-type="image" style="position: absolute; height: 79px; width: 265px; top: 24px; left: 5px;" data-silex-href="http://www.silexlabs.org/"><img src="assets/logo-silexlabs.png" class="silex-element-content" style="width: 100%; height: 100%;"></div><div class="editable-style image-element" data-silex-type="image" style="position: absolute; height: 70px; width: 70px; top: 28px; left: 304px;" data-silex-href="http://www.silexlabs.org/category/the-blog/blog-silex"><img src="assets/bouton-blog.png" class="silex-element-content" style="width: 100%; height: 100%;"></div><div class="editable-style image-element" data-silex-type="image" style="position: absolute; height: 70px; width: 70px; top: 28px; left: 900px;" data-silex-href="https://github.com/silexlabs/Silex/issues?labels=help+wanted&amp;state=open"><img src="assets/bouton-join.png" class="silex-element-content" style="width: 100%; height: 100%;"></div><div class="editable-style image-element" data-silex-type="image" style="position: absolute; height: 70px; width: 70px; top: 28px; left: 401px;" data-silex-href="https://twitter.com/silexlabs"><img src="assets/bouton-twitter-bleu.png" class="silex-element-content" style="width: 100%; height: 100%;"></div><div class="editable-style image-element" data-silex-type="image" style="position: absolute; height: 70px; width: 70px; top: 28px; left: 502px;" data-silex-href="http://www.facebook.com/silexlabs "><img src="assets/bouton-facebook-bleu.png" class="silex-element-content" style="width: 100%; height: 100%;"></div><div class="editable-style image-element" data-silex-type="image" style="position: absolute; height: 70px; width: 70px; top: 28px; left: 600px;" data-silex-href="https://plus.google.com/communities/107373636457908189681"><img src="assets/bouton-googleplus-bleu.png" class="silex-element-content" style="width: 100%; height: 100%;"></div><div class="editable-style image-element" data-silex-type="image" style="position: absolute; height: 70px; width: 70px; top: 28px; left: 699px;" data-silex-href="http://www.youtube.com/user/Silexlabs"><img src="assets/bouton-youtube-bleu.png" class="silex-element-content" style="width: 100%; height: 100%;"></div><div class="editable-style image-element" data-silex-type="image" style="position: absolute; height: 70px; width: 70px; top: 28px; left: 800px;" data-silex-href="http://eepurl.com/F48q5"><img src="assets/bouton-newsletter.png" class="silex-element-content" style="width: 100%; height: 100%;"></div><div data-silex-type="text" class="editable-style text-element abel" style="position: absolute; width: 970px; top: 117px; left: 0px; height: 74px; box-sizing: content-box; background-color: transparent;"><div class="silex-element-content" style="width: 100%; height: 100%;"><p style="text-align: center;" class="normal"><font color="#ffffff" size="2">Creative Commons template by <a href="http://lexoyo.me">@lexoyo</a></font></p><p style="text-align: center;" class="normal"><font color="#ffffff" size="2">Powered by <a href="http://www.silex.me">Silex</a></font></p><p style="text-align: center;" class="normal"><a href="https://www.etsy.com/listing/205456827/wix-premade-template-blue-tech-html5"><font color="#ffffff" size="2">Ispired by this template</font></a></p></div></div></div><div data-silex-type="text" class="editable-style text-element paged-element page-home" style="height: 81px; width: 971px; top: 1455px; left: 0px; position: absolute; box-sizing: content-box;"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><h1 style="text-align: center;" class="heading1">Your app need to take control over the cloud services</h1></div></div><div data-silex-type="container" class="editable-style container-element full-width white-text" style="height: 677px; width: 970px; top: 747px; left: 0px; position: absolute; box-sizing: content-box; background-color: rgb(36, 61, 179);"><div data-silex-type="text" class="editable-style text-element" style="height: 54px; width: 970px; top: 15px; left: 0px; position: absolute; box-sizing: content-box;"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><div style="text-align: center;"><span style="font-family: Comfortaa, cursive; font-size: 30px; line-height: 30px;"><font color="#ffffff">Your users deserve to own their data</font></span></div></div></div><div class="editable-style image-element paged-element page-home" style="height: 379px; width: 379px; top: 50px; left: 528px; position: absolute; box-sizing: content-box;" data-silex-type="image"><img class="silex-element-content" style="width: 100%; height: 100%;" src="assets/saver.png"></div><div class="editable-style image-element paged-element page-home" style="height: 379px; width: 379px; top: 50px; left: 68px; position: absolute;" data-silex-type="image"><img class="silex-element-content" style="width: 100%; height: 100%;" src="assets/chooser.png"></div><div class="editable-style image-element paged-element page-home" style="height: 95px; width: 95px; top: 506px; left: 200px; position: absolute; box-sizing: content-box;" data-silex-type="image"><img class="silex-element-content" style="width: 100%; height: 100%;" src="assets/filezilla.png"></div><div data-silex-type="text" class="editable-style text-element paged-element page-home" style="height: 54px; width: 334px; top: 450px; left: 90px; position: absolute; box-sizing: content-box;"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><h2 class="heading2"><span style="color: rgb(255, 255, 255);">Supported services<br></span></h2></div></div><div class="editable-style image-element paged-element page-home" style="height: 68px; width: 72px; top: 515px; left: 90px; position: absolute; background-color: rgb(255, 255, 255); border-width: 5px; border-style: solid; border-color: rgb(255, 255, 255);" data-silex-type="image"><img class="silex-element-content" style="width: 100%; height: 100%;" src="assets/dropbox.png"></div><div data-silex-type="text" class="editable-style text-element paged-element page-home" style="height: 54px; width: 235px; top: 600px; left: 97px; position: absolute; box-sizing: content-box;"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><span style="color: rgb(255, 255, 255);">Dropbox<span><span>&nbsp;&nbsp; &nbsp;</span><span>&nbsp;&nbsp; &nbsp;</span><span>&nbsp;&nbsp;&nbsp; </span>FTP<br></span></span></div></div><div data-silex-type="text" class="editable-style text-element paged-element page-home" style="height: 251px; width: 419px; top: 450px; left: 551px; position: absolute; box-sizing: content-box;"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><h2 class="heading2"><span style="color: rgb(255, 255, 255);">Services to come</span></h2><span style="color: rgb(255, 255, 255);"><a href="http://seafile.com">Seafile,</a> <a href="http://owncloud.org/">ownCloud</a>, <a href="https://pyd.io/">Pydio</a>, <a href="http://www.getsync.com/">BTSync</a><br><a href="http://aws.amazon.com/s3/">Amazon S3</a>, <a href="http://en.wikipedia.org/wiki/WebDAV">WebDav</a><br><a href="https://www.mediafire.com/">MediaFire</a>, <a href="http://www.firedrive.com/">Firedrive</a>, <a href="https://www.box.com/">Box</a>, <a href="https://onedrive.live.com/">OneDrive</a><br><br>Contribute your own or hire one of us to speed up the integration of new services <br><br></span><div style="margin-left: 40px;"><span style="color: rgb(255, 255, 255);">see <a href="https://github.com/silexlabs/cloud-explorer/blob/master/README.md#contributors">the contributors' list here</a>.</span><br><span style="color: rgb(255, 255, 255);"></span></div></div></div></div><div data-silex-type="text" class="editable-style text-element" style="height: 356px; width: 520px; top: 100px; left: 399px; position: absolute; box-sizing: content-box; background-image: url('assets/screen.png'); background-repeat: no-repeat;"><div class="silex-element-content normal" style="width: 100%; height: 100%;"></div></div><div data-silex-type="image" class="editable-style image-element hover-border" style="height: 222px; width: 400px; top: 135px; left: 474px; position: absolute;"><img src="assets/cloud-explorer.png" class="silex-element-content" style="width: 100%; height: 100%;"></div><div class="editable-style text-element page-home paged-element" style="height: 61px; width: 259px; top: 1527px; left: 0px; position: absolute; box-sizing: content-box;" data-silex-type="text"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><h2 class="heading2">Available SDKs</h2></div></div><div class="editable-style image-element page-home paged-element" style="height: 112px; width: 99.6571px; top: 1588px; left: 0px; position: absolute; box-sizing: content-box;" data-silex-type="image"><img class="silex-element-content" style="width: 100%; height: 100%;" src="../..///sites-silex/cloud-explorer.org/assets/javascript.png"></div><div class="editable-style image-element page-home paged-element" style="height: 55px; width: 161px; top: 1764px; left: 5px; position: absolute; box-sizing: content-box;" data-silex-type="image"><img class="silex-element-content" style="width: 100%; height: 100%;" src="../..///sites-silex/cloud-explorer.org/assets/nodejs.png"></div><div class="editable-style text-element page-home paged-element" style="height: 61px; width: 259px; top: 1527px; left: 550px; position: absolute; box-sizing: content-box;" data-silex-type="text"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><h2 class="heading2">SDKs to come<br></h2></div></div><div class="editable-style image-element page-home paged-element" style="height: 104px; width: 379px; top: 1579px; left: 550px; position: absolute; box-sizing: content-box;" data-silex-type="image"><img class="silex-element-content" style="width: 100%; height: 100%;" src="../..///sites-silex/cloud-explorer.org/assets/android-windows-ios-bb.png"></div><div data-silex-type="text" class="editable-style text-element" style="height: 151px; width: 356px; top: 1592px; left: 176px; position: absolute; box-sizing: content-box;"><div class="silex-element-content normal" style="width: 100%; height: 100%;">The Javascript API is very simple:<br><ul><li>choose a file or folder</li><li>read and write to the files</li><li>upload files</li></ul><p class="normal"><a href="https://github.com/silexlabs/cloud-explorer/blob/master/README.md#configuration">See the instructions on github</a><br></p></div></div><div data-silex-type="text" class="editable-style text-element" style="height: 148px; width: 347px; top: 1764px; left: 178px; position: absolute; box-sizing: content-box;"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><a href="https://github.com/silexlabs/unifile">Unifile</a> is Cloud Explorer's backend.<br><br>It exposes a node.js API: <br><div style="margin-left: 40px;"><a href="https://github.com/silexlabs/unifile">the server side API</a><br></div><br>And it is also accessible through <br><div style="margin-left: 40px;">the <a href="http://docs.unifile.apiary.io/">HTTP request API</a><br></div><br></div></div><div class="editable-style text-element page-home paged-element" style="height: 239px; width: 423px; top: 1686px; left: 550px; position: absolute; box-sizing: content-box;" data-silex-type="text"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><p class="normal">We plan to release native SDKs for<br></p><ul><li>Android</li><li>iOS</li><li>Windows phone</li><li>BlackBerry</li></ul>Which is made possible by our language of choice: <br><br><div style="margin-left: 40px;"><a href="http://haxe.org/">Haxe, the Cross-platform Toolkit</a></div></div></div><div class="editable-style text-element nav" style="height: 40px; width: 667px; top: 31px; left: 303px; position: absolute; box-sizing: content-box; border-width: 0px 0px 1px; border-style: solid;" data-silex-type="text"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><div style="text-align: right;"><a class="page-link-active" href="#!page-home">Home</a><span><span>&nbsp;&nbsp; &nbsp;</span><span>&nbsp;&nbsp;&nbsp; </span><a href="https://github.com/silexlabs/cloud-explorer">Source code</a> &nbsp; &nbsp;</span><span>&nbsp;&nbsp;&nbsp; </span><a href="https://github.com/silexlabs/cloud-explorer/blob/master/README.md#contributors">Hire us!</a><br></div></div></div></div><div data-silex-type="container" class="editable-style container-element paged-element full-width page-home" style="height: 236px; width: 1080px; top: 1959px; left: 0px; position: absolute; box-sizing: content-box; background-color: rgb(36, 61, 179);"></div><div data-silex-type="container" class="editable-style container-element paged-element full-width page-home" style="height: 699px; width: 1080px; top: 746px; left: 1px; position: absolute; box-sizing: content-box; background-color: rgb(36, 61, 179);"></div></body></html>
+
+
+
+
+
+
+    <meta name="website-width" content="970">
+    <style type="text/css" class="silex-style-settings">
+        .website-width {
+            width: 970px;
+        }
+    </style>
+
+
+
+
+
+
+    <meta name="publicationPath" content="{&quot;name&quot;:&quot;wip2&quot;,&quot;isDir&quot;:true,&quot;mime&quot;:&quot;application/octet-stream&quot;,&quot;folder&quot;:&quot;cloud-explorer.org&quot;,&quot;path&quot;:&quot;cloud-explorer.org/wip2&quot;,&quot;url&quot;:&quot;http://localhost:6805/github/get/cloud-explorer.org/wip2&quot;,&quot;service&quot;:&quot;github&quot;}">
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2.2" data-silex-viewport="">
+    <!-- Silex HEAD tag do not remove -->
+    <!-- End of Silex HEAD tag do not remove -->
+</head>
+
+<body data-silex-type="container" class="silex-id-1507135535125-41 enable-mobile silex-runtime" data-silex-id="silex-id-1507135535125-41">
+    <div data-silex-type="container" class="prevent-draggable container-element editable-style silex-id-1507136302526-1 section-element" data-silex-id="silex-id-1507136302526-1">
+        <div data-silex-type="container" class="editable-style silex-id-1507136302525-0 container-element silex-element-content silex-container-content website-width prevent-draggable" data-silex-id="silex-id-1507136302525-0">
+
+            <div class="editable-style text-element nav silex-id-1507135534398-2 hide-on-mobile" data-silex-type="text" data-silex-id="silex-id-1507135534398-2" style="">
+                <div class="silex-element-content normal">
+                    <div style="text-align: right;"><a class="page-link-active" href="#!page-home">Home</a><span><span>&nbsp;&nbsp; &nbsp;</span><span>&nbsp;&nbsp;&nbsp; </span><a href="https://github.com/silexlabs/CloudExplorer2">Source code</a> &nbsp; &nbsp;</span><span>&nbsp;&nbsp;&nbsp; </span>
+                        <a href="https://github.com/silexlabs/CloudExplorer2/graphs/contributors">Hire us!</a><br></div>
+                </div>
+            </div>
+            <div data-silex-type="container" class="editable-style container-element silex-id-1507135535105-39" data-silex-id="silex-id-1507135535105-39" style="">
+
+                <div data-silex-type="image" class="editable-style image-element silex-id-1507135535094-38" data-silex-id="silex-id-1507135535094-38" style=""><img src="assets/cloud-explorer-logo.png" class="silex-element-content"></div>
+            </div>
+
+        </div>
+    </div>
+    <div data-silex-type="container" class="prevent-draggable container-element editable-style silex-id-1507136379292-3 section-element" data-silex-id="silex-id-1507136379292-3">
+        <div data-silex-type="container" class="editable-style silex-id-1507136379292-2 container-element silex-element-content silex-container-content website-width prevent-draggable" data-silex-id="silex-id-1507136379292-2">
+
+            <div data-silex-type="text" class="editable-style text-element silex-id-1507135535033-36" data-silex-id="silex-id-1507135535033-36" style="">
+                <div class="silex-element-content normal">
+                    <header class="title">
+                        <header class="title" style="text-align: left;">Cloud-enable your apps</header>
+                        <p style="text-align: left;" class="normal"><br>
+                            <font size="4">A free customizable file browser and a&nbsp;</font>
+                        </p>
+                        <p style="text-align: left;" class="normal">
+                            <font size="4">self hosted node.js API server.<br></font>
+                        </p>
+                        <p style="text-align: left;" class="normal">
+                            <font size="4"><br></font>
+                        </p>
+                        <p style="text-align: left;" class="normal">
+                            <font size="4">Manage your users'&nbsp;</font><span style="font-size: large;">cloud services&nbsp;</span></p>
+                        <p style="text-align: left;" class="normal"><span style="font-size: large;">from your application.</span></p>
+                    </header>
+                </div>
+            </div>
+            <div data-silex-type="container" class="editable-style silex-id-1507136037791-44 container-element" data-silex-id="silex-id-1507136037791-44" style="">
+
+
+                <div data-silex-type="text" class="editable-style text-element btn silex-id-1507136147928-46" data-silex-id="silex-id-1507136147928-46" style="" data-silex-href="https://github.com/silexlabs/CloudExplorer2#cloudexplorer2">
+                    <div class="silex-element-content normal">Integration Guide</div>
+                </div>
+                <div data-silex-type="text" class="editable-style text-element btn silex-id-1507137608438-1" data-silex-id="silex-id-1507137608438-1" style="" data-silex-href="https://github.com/silexlabs/CloudExplorer2">
+                    <div class="silex-element-content normal">Source code</div>
+                </div>
+            </div>
+
+            <div data-silex-type="text" class="editable-style silex-id-1507136059094-45 text-element" data-silex-id="silex-id-1507136059094-45" style="">
+                <div class="silex-element-content normal">
+                    <h3 style="text-align: center;" class="heading3">Live Demo</h3>
+                </div>
+            </div>
+            <div data-silex-type="html" class="editable-style silex-id-1507137294724-0 html-element" data-silex-id="silex-id-1507137294724-0" style="">
+                <div class="silex-element-content"><iframe width="100%" height="430" src="https://cloud-explorer2.herokuapp.com/cloud-explorer/cloud-explorer.html"></iframe></div>
+            </div>
+        </div>
+    </div>
+    <div data-silex-type="container" class="prevent-draggable container-element editable-style silex-id-1507136590186-5 section-element" data-silex-id="silex-id-1507136590186-5">
+        <div data-silex-type="container" class="editable-style silex-id-1507136590185-4 container-element silex-element-content silex-container-content website-width prevent-draggable" data-silex-id="silex-id-1507136590185-4">
+            <div data-silex-type="text" class="editable-style text-element silex-id-1507135535004-35" data-silex-id="silex-id-1507135535004-35" style="">
+                <div class="silex-element-content normal">
+                    <h1 class="heading1">Self hosted</h1>
+                    <p class="normal">Cloud Explorer is free and open source, so you can host it anywhere, even for free on <a href="http://www.heroku.com/">Heroku</a>.&nbsp;</p>
+                    <p class="normal"><br></p>
+                    <blockquote style="margin: 0 0 0 40px; border: none; padding: 0px;">
+                        <p class="normal"><a href="https://github.com/silexlabs/cloud-explorer">Download on github</a>.</p>
+                    </blockquote>
+                </div>
+            </div>
+            <div data-silex-type="text" class="editable-style text-element silex-id-1507135534975-34" data-silex-id="silex-id-1507135534975-34" style="">
+                <div class="silex-element-content normal">
+                    <h1 class="heading1">Simple to use</h1>
+                    <p class="normal">Cloud Explorer is very simple to set-up in your app. And also straightforward for your users.</p>
+                    <p class="normal"><br></p>
+                    <p class="normal"><br></p>
+                    <blockquote style="margin: 0 0 0 40px; border: none; padding: 0px;">
+                        <p class="normal"><a href="https://github.com/silexlabs/cloud-explorer">Instructions on github</a>.</p>
+                    </blockquote>
+                </div>
+            </div>
+            <div data-silex-type="text" class="editable-style text-element silex-id-1507135534949-33" data-silex-id="silex-id-1507135534949-33" style="">
+                <div class="silex-element-content normal">
+                    <h1 class="heading1">Full control</h1>
+                    <p class="normal">A powerful API on client and server sides. Have full control over your users' data.</p>
+                    <p class="normal"><br></p>
+                    <p class="normal"><br></p>
+                    <blockquote style="margin: 0 0 0 40px; border: none; padding: 0px;">
+                        <p class="normal"><a href="https://github.com/silexlabs/cloud-explorer">Start now on github</a>.</p>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div data-silex-type="container" class="prevent-draggable container-element editable-style silex-id-1507136665995-7 section-element" data-silex-id="silex-id-1507136665995-7">
+        <div data-silex-type="container" class="editable-style silex-id-1507136665994-6 container-element silex-element-content silex-container-content website-width prevent-draggable" data-silex-id="silex-id-1507136665994-6">
+            <div data-silex-type="text" class="editable-style text-element silex-id-1507135534746-20" data-silex-id="silex-id-1507135534746-20" style="">
+                <div class="silex-element-content normal">
+                    <h2 style="height: 0px;"></h2>
+                    <h1 style="text-align: center;"><span style="font-weight: normal;"><span style="color: rgb(255, 255, 255);" class="heading1">Your users deserve to own their data</span></span>
+                    </h1>
+                </div>
+            </div>
+            <div class="editable-style image-element paged-element page-home silex-id-1507135534709-19" data-silex-type="image" data-silex-id="silex-id-1507135534709-19" style=""><img class="silex-element-content" src="assets/saver.png"></div>
+            <div class="editable-style image-element paged-element page-home silex-id-1507135534704-18" data-silex-type="image" data-silex-id="silex-id-1507135534704-18" style=""><img class="silex-element-content" src="assets/chooser.png"></div>
+
+            <div data-silex-type="text" class="editable-style text-element paged-element page-home silex-id-1507135534657-16" data-silex-id="silex-id-1507135534657-16" style="">
+                <div class="silex-element-content normal">
+                    <h2 class="heading2"><span style="color: rgb(255, 255, 255);">Supported services<br></span></h2>
+                </div>
+            </div>
+            <div class="editable-style image-element paged-element page-home silex-id-1507135534614-15" data-silex-type="image" data-silex-id="silex-id-1507135534614-15" style=""><img class="silex-element-content" src="assets/dropbox.png"></div>
+
+
+
+            <div class="editable-style image-element paged-element page-home silex-id-1507135534692-17" data-silex-type="image" data-silex-id="silex-id-1507135534692-17" style=""><img class="silex-element-content" src="assets/filezilla.png"></div>
+            <div data-silex-type="image" class="editable-style silex-id-1507139013216-2 image-element" data-silex-id="silex-id-1507139013216-2" style=""><img src="assets/github-10-512.png" class="silex-element-content"></div>
+            <div data-silex-type="text" class="editable-style text-element paged-element page-home silex-id-1507135534584-14" data-silex-id="silex-id-1507135534584-14" style="">
+                <div class="silex-element-content normal"><span style="color: rgb(255, 255, 255);">Dropbox<span><span>&nbsp;&nbsp; &nbsp;</span><span>&nbsp;&nbsp; &nbsp;</span><span>&nbsp;&nbsp;&nbsp; </span>FTP/SFTP&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Github<br></span>
+                    </span>
+                </div>
+            </div>
+            <div data-silex-type="text" class="editable-style text-element paged-element page-home silex-id-1507135534576-13" data-silex-id="silex-id-1507135534576-13" style="">
+                <div class="silex-element-content normal">
+                    <h2 class="heading2"><span style="color: rgb(255, 255, 255);">Services to come</span></h2><span style="color: rgb(255, 255, 255);"><a href="http://seafile.com">Seafile,</a> <a href="http://owncloud.org/">ownCloud</a>, <a href="https://pyd.io/">Pydio</a>, <a href="http://www.getsync.com/">BTSync</a><br><a href="http://aws.amazon.com/s3/">Amazon S3</a>, <a href="http://en.wikipedia.org/wiki/WebDAV">WebDav</a><br><a href="https://www.mediafire.com/">MediaFire</a>, <a href="http://www.firedrive.com/">Firedrive</a>, <a href="https://www.box.com/">Box</a>, <a href="https://onedrive.live.com/">OneDrive</a><br><br>Contribute your own or hire one of us to speed up the integration of new services <br><br></span>
+                    <div style="margin-left: 40px;"><span style="color: rgb(255, 255, 255);">see <a href="https://github.com/silexlabs/cloud-explorer/blob/master/README.md#contributors">the contributors' list here</a>.</span><br><span style="color: rgb(255, 255, 255);"></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <div class="silex-pages">
+        <div data-silex-type="image" data-silex-id="silex-id-hamburger-menu" class="menu-button editable-style silex-id-hamburger-menu image-element page-page-1 paged-element prevent-draggable prevent-resizable hide-on-mobile"><img alt="open mobile menu" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAoCAYAAAC8cqlMAAAB5UlEQVR42u2ZPWvCUBSGM+UfFO3e3dLu/QN+oKj4EUXRQREEJYgoiCAu6qCogyDo7iJ21UUaKqEgCC4iiEMGB3UVgsnpTWj/wfVK2nvhGbKEPJyT996TMMzPGg6H5mKx+GgkyuWyeTQasb8OTDwef4tEIp8+n+/LYIjJZJJHQiwzm81M6OLDarWqNpsNjEYgEJCy2ewT0+/3TagighElNFAnQT6ft1ARKkJFqMgfFvF4PFpuEwFtdrcRqVarIIoirFYrIiyXSxiPx+B2u/GJBINBuF6vQHopigK1Wg2fCMdxcLlciIuoqgqNRgOfiN1uB3Qwg91uB8fjkQiHwwEmkwne1qLxS0VuKKJle71eh06nQ4Rmswk8z+MVcTqdsNlsQJZlotF7Pp8hk8ngE4lGo/qN7xG/vV4Pb0Xm8zlxkdPpBGgMx/+yJxIJKBQKRMjlcuBwOGhq/Q+RcDgMsViMCFrAuFwu/CKDwQC22y1IkkSE/X4PgiDo+xc2Ea0S9zjGa/Hb7Xbxifj9fj0K7yFSqVTwtlY6nYbpdKpPiSRYLBbQarX0PYymFhWhIlSEilCRW6GdyUqlkoVZr9dsKpXiOY6TtW+7BkNBz/7ebrcf9L+6Xq+XRYPMMyrTq5EIhUIvaAjTJb4BBNQ2yhnth0wAAAAASUVORK5CYII="
+                class="silex-element-content"></div><a id="page-home" data-silex-type="page" class="page-element page-link-active">Home</a></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div data-silex-type="container" class="prevent-draggable container-element editable-style silex-id-1507136757662-9 section-element" data-silex-id="silex-id-1507136757662-9">
+        <div data-silex-type="container" class="editable-style silex-id-1507136757662-8 container-element silex-element-content silex-container-content website-width prevent-draggable" data-silex-id="silex-id-1507136757662-8">
+            <div data-silex-type="text" class="editable-style text-element paged-element page-home silex-id-1507135534793-22" data-silex-id="silex-id-1507135534793-22" style="">
+                <div class="silex-element-content normal">
+                    <h1 class="heading1" style="text-align: center;">Your app need to take control over the cloud services</h1>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+            <div class="editable-style image-element page-home paged-element silex-id-1507135534480-8" data-silex-type="image" data-silex-id="silex-id-1507135534480-8" style=""><img src="assets/nodejs.png" class="silex-element-content"></div>
+            <div data-silex-type="text" class="editable-style text-element silex-id-1507135534402-4" data-silex-id="silex-id-1507135534402-4" style="">
+                <div class="silex-element-content normal"><a href="https://github.com/silexlabs/unifile">Unifile</a> is Cloud Explorer's backend.<br><br>It has a beautiful node.js API: <br>
+                    <div style="margin-left: 40px;"><a href="http://projects.silexlabs.org/unifile/Unifile.html">the server side API</a><br></div><br>And Cloud Explorer makes it easy to expose&nbsp;<br>
+                    <div style="margin-left: 40px;">as an&nbsp;<a href="https://github.com/silexlabs/CloudExplorer2/blob/master/router.js">HTTP API</a><br></div><br></div>
+            </div>
+            <div class="editable-style image-element page-home paged-element silex-id-1507135534515-9" data-silex-type="image" data-silex-id="silex-id-1507135534515-9" style=""><img src="assets/javascript.png" class="silex-element-content"></div>
+            <div data-silex-type="text" class="editable-style text-element silex-id-1507135534409-5" data-silex-id="silex-id-1507135534409-5" style="">
+                <div class="silex-element-content normal">The Javascript API is very simple:<br>
+                    <ul>
+                        <li>choose a file or folder</li>
+                        <li>read and write to the files</li>
+                        <li>upload files</li>
+                    </ul>
+                    <p class="normal"><a href="https://github.com/silexlabs/CloudExplorer2#cloudexplorer2">See the instructions on github</a><br></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div data-silex-type="container" class="prevent-draggable container-element editable-style silex-id-1507136824943-11 section-element" data-silex-id="silex-id-1507136824943-11">
+        <div data-silex-type="container" class="editable-style silex-id-1507136824942-10 container-element silex-element-content silex-container-content website-width prevent-draggable" data-silex-id="silex-id-1507136824942-10">
+            <div class="editable-style image-element silex-id-1507135534928-31" data-silex-type="image" data-silex-href="http://www.silexlabs.org/" data-silex-id="silex-id-1507135534928-31" style=""><img src="assets/logo-silexlabs.png" class="silex-element-content"></div>
+            <div class="editable-style image-element silex-id-1507135534886-30" data-silex-type="image" data-silex-href="http://www.silexlabs.org/category/the-blog/blog-silex" data-silex-id="silex-id-1507135534886-30" style=""><img src="assets/bouton-blog.png" class="silex-element-content"></div>
+            <div class="editable-style image-element silex-id-1507135534874-29" data-silex-type="image" data-silex-href="https://github.com/silexlabs/Silex/issues?labels=help+wanted&amp;state=open" data-silex-id="silex-id-1507135534874-29" style=""><img src="assets/bouton-join.png" class="silex-element-content"></div>
+            <div class="editable-style image-element silex-id-1507135534856-28" data-silex-type="image" data-silex-href="https://twitter.com/silexlabs" data-silex-id="silex-id-1507135534856-28" style=""><img src="assets/bouton-twitter-bleu.png" class="silex-element-content"></div>
+            <div class="editable-style image-element silex-id-1507135534840-27" data-silex-type="image" data-silex-href="http://www.facebook.com/silexlabs%20" data-silex-id="silex-id-1507135534840-27" style=""><img src="assets/bouton-facebook-bleu.png" class="silex-element-content"></div>
+            <div class="editable-style image-element silex-id-1507135534834-26" data-silex-type="image" data-silex-href="https://plus.google.com/communities/107373636457908189681" data-silex-id="silex-id-1507135534834-26" style=""><img src="assets/bouton-googleplus-bleu.png" class="silex-element-content"></div>
+            <div class="editable-style image-element silex-id-1507135534824-25" data-silex-type="image" data-silex-href="http://www.youtube.com/user/Silexlabs" data-silex-id="silex-id-1507135534824-25" style=""><img src="assets/bouton-youtube-bleu.png" class="silex-element-content"></div>
+            <div class="editable-style image-element silex-id-1507135534819-24" data-silex-type="image" data-silex-href="http://eepurl.com/F48q5" data-silex-id="silex-id-1507135534819-24" style=""><img src="assets/bouton-newsletter.png" class="silex-element-content"></div>
+            <div data-silex-type="text" class="editable-style text-element abel silex-id-1507135534814-23" data-silex-id="silex-id-1507135534814-23" style="">
+                <div class="silex-element-content">
+                    <p style="text-align: center;" class="normal">
+                        <font color="#ffffff" size="2">Creative Commons template by <a href="http://lexoyo.me">@lexoyo</a></font>
+                    </p>
+                    <p style="text-align: center;" class="normal">
+                        <font color="#ffffff" size="2">Powered by <a href="http://www.silex.me">Silex</a></font>
+                    </p>
+                    <p style="text-align: center;" class="normal">
+                        <a href="https://www.etsy.com/listing/205456827/wix-premade-template-blue-tech-html5">
+                            <font color="#ffffff" size="2">Ispired by this template</font>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
